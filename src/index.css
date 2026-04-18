@@ -1,0 +1,280 @@
+@import "tailwindcss";
+
+html {
+  background-color: #0a0212;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0a0212;
+}
+
+.sweet-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(255, 255, 255, 0.52), transparent 25%),
+    radial-gradient(circle at 88% 18%, rgba(244, 114, 182, 0.2), transparent 22%);
+}
+
+.floating-heart {
+  position: absolute;
+  z-index: 5;
+  font-size: 1.5rem;
+  opacity: 0.8;
+  animation: floaty 3.6s ease-in-out infinite;
+}
+
+.floating-heart-left {
+  top: 110px;
+  left: 24px;
+}
+
+.floating-heart-right {
+  right: 24px;
+  top: 160px;
+  animation-delay: 1s;
+}
+
+.sparkle-pill {
+  position: relative;
+}
+
+.sparkle-pill::after {
+  content: "✦";
+  position: absolute;
+  top: -7px;
+  right: 10px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.letter-card {
+  animation: letter-pop 500ms ease-out;
+}
+
+.puzzle-card {
+  animation: letter-pop 420ms ease-out;
+}
+
+.cute-photo-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transform: rotate(-0.8deg);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.cute-photo-card:nth-child(even) {
+  transform: rotate(0.8deg);
+}
+
+.cute-photo-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 18px;
+  width: 58px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(244, 114, 182, 0.38);
+  transform: rotate(8deg);
+}
+
+.cute-photo-card:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 0 16px 30px rgba(109, 40, 217, 0.22);
+}
+
+@media (max-width: 640px) {
+  .cute-photo-card,
+  .cute-photo-card:nth-child(even) {
+    transform: none;
+  }
+
+  .cute-photo-card::before {
+    top: -8px;
+    right: 12px;
+    width: 44px;
+    height: 18px;
+  }
+}
+
+.fireworks {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+}
+
+.firework-dot {
+  --angle: calc(var(--i) * 20deg);
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  margin-top: -5px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #fff 0%, #e9d5ff 45%, #a855f7 100%);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.7);
+  transform: rotate(var(--angle)) translateY(-10px);
+  animation: fireworks-burst 900ms ease-out forwards;
+  animation-delay: calc((var(--i) % 6) * 35ms);
+}
+
+@keyframes letter-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fireworks-burst {
+  0% {
+    opacity: 1;
+    transform: rotate(var(--angle)) translateY(-10px) scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateY(-170px) scale(1.2);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-slide-enter {
+  animation: hero-fade 320ms ease-out;
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letter-card,
+  .puzzle-card,
+  .firework-dot,
+  .cute-photo-card,
+  .floating-heart,
+  .hero-slide-enter,
+  .back-birthday-link:hover {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.scroll-roll {
+  position: relative;
+  transform: translateY(-4px);
+}
+
+.scroll-roll::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), transparent 42%);
+  pointer-events: none;
+}
+
+.scroll-roll-inner {
+  scrollbar-color: rgba(167, 139, 250, 0.55) rgba(15, 5, 25, 0.6);
+}
+
+.scroll-roll-inner::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-roll-inner::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(167, 139, 250, 0.45);
+}
+
+@keyframes back-link-pulse {
+  0%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 14px rgba(167, 139, 250, 0.35);
+  }
+  50% {
+    transform: translateY(-1px);
+    box-shadow: 0 0 22px rgba(244, 114, 182, 0.42);
+  }
+}
+
+.back-birthday-link:hover {
+  animation: back-link-pulse 1.25s ease-in-out infinite;
+}
+
+/* Custom cursor: violet circle + soft glow (blur-xl feel without blurring emoji) */
+.custom-cursor-glow {
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.35),
+    0 0 24px 4px rgba(139, 92, 246, 0.45),
+    0 0 48px 8px rgba(192, 132, 252, 0.25);
+  filter: drop-shadow(0 0 12px rgba(167, 139, 250, 0.6));
+}
+
+@keyframes music-dock-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 18px rgba(168, 85, 247, 0.45),
+      0 0 36px rgba(244, 114, 182, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 28px rgba(244, 114, 182, 0.5),
+      0 0 52px rgba(139, 92, 246, 0.35);
+  }
+}
+
+.music-cute-btn {
+  background: linear-gradient(125deg, #5b21b6, #7c3aed 45%, #c026d3);
+}
+
+.music-cute-btn--active {
+  animation: music-dock-glow 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-cute-btn--active {
+    animation: none;
+  }
+}
+
+/* YouTube player kept in DOM for audio API, hidden from view */
+.youtube-audio-only-shell {
+  position: fixed;
+  left: -900px;
+  top: 0;
+  width: 320px;
+  height: 180px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
