@@ -16,16 +16,25 @@ export default function CuteBackground() {
   return (
     <div className="cute-bg-shell pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
       <div className="cute-bg-gradient-base" />
-      <div className="cute-bg-blob cute-bg-blob--1" />
-      <div className="cute-bg-blob cute-bg-blob--2" />
-      <div className="cute-bg-blob cute-bg-blob--3" />
-      <div className="cute-bg-blob cute-bg-blob--4" />
-      <div className="cute-bg-starfield" />
-      <div className="cute-bg-shimmer" />
+      <div className="cute-bg-blob cute-bg-blob--1 cute-bg-anim animate-cute-blob" />
+      <div
+        className="cute-bg-blob cute-bg-blob--2 cute-bg-anim animate-cute-blob-slow"
+        style={{ animationDelay: '-7s' }}
+      />
+      <div
+        className="cute-bg-blob cute-bg-blob--3 cute-bg-anim animate-cute-blob-slower"
+        style={{ animationDelay: '-12s' }}
+      />
+      <div
+        className="cute-bg-blob cute-bg-blob--4 cute-bg-anim animate-cute-blob-soft"
+        style={{ animationDelay: '-4s' }}
+      />
+      <div className="cute-bg-starfield cute-bg-anim animate-cute-star-twinkle" />
+      <div className="cute-bg-shimmer cute-bg-anim animate-cute-shimmer" />
       {FLOAT_DECOR.map((item, index) => (
         <span
           key={index}
-          className="cute-bg-float"
+          className="cute-bg-float cute-bg-anim animate-cute-float"
           style={{
             top: item.top,
             left: item.left,

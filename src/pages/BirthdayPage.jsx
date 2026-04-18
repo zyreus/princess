@@ -132,7 +132,8 @@ export default function BirthdayPage() {
           <div className="relative rounded-2xl border border-violet-500/30 bg-violet-950/40 px-6 py-10 pr-14 backdrop-blur-md sm:px-10 sm:py-12 sm:pr-16">
             <nav
               className="absolute right-3 top-1/2 z-10 flex -translate-y-1/2 flex-col items-center gap-3 sm:right-4"
-              aria-label="Hero pages"
+              aria-describedby="hero-carousel-hint"
+              aria-label={`Hero pages, ${heroPages.length} messages — use the dots to switch`}
             >
               {heroPages.map((_, index) => (
                 <button
@@ -153,6 +154,12 @@ export default function BirthdayPage() {
             <div key={heroSlideIndex} className="hero-slide-enter">
               <p className="text-xs font-semibold uppercase tracking-[0.35em] text-violet-300/80">
                 {heroPages[heroSlideIndex].eyebrow}
+              </p>
+              <p
+                id="hero-carousel-hint"
+                className="mx-auto mt-2 max-w-[16rem] text-center text-[10px] font-medium leading-snug text-violet-200/75 sm:max-w-md sm:text-xs"
+              >
+                Tap a circle on the right for more birthday notes ✨
               </p>
               {heroPages[heroSlideIndex].title === 'welcome' ? (
                 <h1 className="mt-5 font-serif text-4xl font-light tracking-tighter text-violet-100 sm:text-5xl md:text-6xl xl:text-7xl">

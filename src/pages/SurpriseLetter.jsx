@@ -144,7 +144,7 @@ export default function SurpriseLetter() {
     >
       <Link
         to="/"
-        className="back-birthday-link fixed left-4 top-4 z-20 rounded-full border border-violet-500/40 bg-violet-950/60 px-3 py-1.5 text-xs font-medium tracking-wide text-violet-100 shadow-lg shadow-violet-900/40 backdrop-blur-md sm:left-6 sm:top-6"
+        className="back-birthday-link fixed left-4 top-4 z-20 rounded-full border border-violet-500/40 bg-violet-950/60 px-3 py-1.5 text-xs font-medium tracking-wide text-violet-100 shadow-lg shadow-violet-900/40 backdrop-blur-md transition-shadow hover:animate-back-link-pulse sm:left-6 sm:top-6"
       >
         ← Back to Birthday
       </Link>
@@ -179,7 +179,7 @@ export default function SurpriseLetter() {
                 onClick={togglePlay}
                 disabled={!playerReady}
                 className={`music-cute-btn flex min-w-[140px] items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-[1.04] active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 ${
-                  isPlaying ? 'music-cute-btn--active' : ''
+                  isPlaying ? 'animate-music-glow' : ''
                 }`}
               >
                 <span className="text-lg" aria-hidden>
