@@ -4,10 +4,10 @@ import { motion as Motion } from 'framer-motion'
 import princessPhoto from '../assets/princess.jpg'
 import princessAngelPhoto from '../assets/princessang.jpg'
 import { useCursorLetterLinkHover } from '../hooks/useCursorLetterLinkHover.js'
+import { isSurpriseLetterUnlocked, markSurpriseLetterUnlocked } from '../utils/surpriseLetterUnlock.js'
 
 /** Set in code to the password she should type (lowercased when checked). */
 const SURPRISE_LETTER_PASSWORD = 'paslot'
-const LETTER_PASSWORD_OK_KEY = 'surpriseLetterPasswordOk'
 
 export default function BirthdayPage() {
   const navigate = useNavigate()
@@ -86,7 +86,7 @@ export default function BirthdayPage() {
   }
 
   const handleOpenSurpriseLetterClick = () => {
-    if (typeof window !== 'undefined' && sessionStorage.getItem(LETTER_PASSWORD_OK_KEY) === '1') {
+    if (isSurpriseLetterUnlocked()) {
       goToLetterPage()
       return
     }
@@ -102,7 +102,7 @@ export default function BirthdayPage() {
       setLetterPasswordError('Not quite, princess. Hint: her royal last name.')
       return
     }
-    sessionStorage.setItem(LETTER_PASSWORD_OK_KEY, '1')
+    markSurpriseLetterUnlocked()
     setShowLetterPasswordGate(false)
     setLetterPasswordError('')
     setLetterPasswordInput('')

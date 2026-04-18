@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion as Motion } from 'framer-motion'
 import { MAIN_LETTER_TEXT } from '../data/letterContent.js'
+import { markSurpriseLetterUnlocked } from '../utils/surpriseLetterUnlock.js'
 
 /** Official music video — Taylor Swift "22" (YouTube; enables autoplay + custom controls). */
 const YOUTUBE_VIDEO_ID = 'AgFeZr5ptV8'
@@ -12,6 +13,10 @@ export default function SurpriseLetter() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(true)
   const [playerReady, setPlayerReady] = useState(false)
+
+  useEffect(() => {
+    markSurpriseLetterUnlocked()
+  }, [])
 
   const destroyPlayer = useCallback(() => {
     if (playerRef.current?.destroy) {
