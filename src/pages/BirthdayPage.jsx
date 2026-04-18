@@ -5,7 +5,6 @@ import princessPhoto from '../assets/princess.jpg'
 import princessAngelPhoto from '../assets/princessang.jpg'
 import { useCursorLetterLinkHover } from '../hooks/useCursorLetterLinkHover.js'
 
-const LETTER_UNLOCK_KEY = 'letterUnlocked'
 /** Set in code to the password she should type (lowercased when checked). */
 const SURPRISE_LETTER_PASSWORD = 'paslot'
 const LETTER_PASSWORD_OK_KEY = 'surpriseLetterPasswordOk'
@@ -64,18 +63,11 @@ export default function BirthdayPage() {
     {
       eyebrow: 'What is next',
       title: 'Your surprises await',
-      body: 'Scroll down for photos, sweet reasons, a little puzzle, and your surprise letter. Tap a dot anytime to come back to this welcome page. 💜',
+      body: 'Scroll down for photos, sweet reasons, and your surprise letter. Tap a dot anytime to come back to this welcome page. 💜',
     },
   ]
 
   const [heroSlideIndex, setHeroSlideIndex] = useState(0)
-  const [showFireworks, setShowFireworks] = useState(false)
-  const [showPuzzle, setShowPuzzle] = useState(false)
-  const [puzzleAnswer, setPuzzleAnswer] = useState('')
-  const [puzzleError, setPuzzleError] = useState('')
-  const [isPuzzleSolved, setIsPuzzleSolved] = useState(
-    () => typeof window !== 'undefined' && sessionStorage.getItem(LETTER_UNLOCK_KEY) === '1',
-  )
   const [quoteIndex, setQuoteIndex] = useState(0)
   const [affirmationIndex, setAffirmationIndex] = useState(0)
   const [showLetterPasswordGate, setShowLetterPasswordGate] = useState(false)
@@ -88,33 +80,6 @@ export default function BirthdayPage() {
     }, 4200)
     return () => window.clearInterval(intervalId)
   }, [quotes.length])
-
-  const handleSurpriseClick = () => {
-    setShowPuzzle(true)
-    setPuzzleError('')
-  }
-
-  const handlePuzzleSubmit = (event) => {
-    event.preventDefault()
-    const normalizedAnswer = puzzleAnswer.trim().toLowerCase()
-    const acceptedAnswers = ['violet']
-
-    if (!acceptedAnswers.includes(normalizedAnswer)) {
-      setPuzzleError('Try again, princess! Hint: it is your theme color.')
-      return
-    }
-
-    sessionStorage.setItem(LETTER_UNLOCK_KEY, '1')
-    setIsPuzzleSolved(true)
-    setShowPuzzle(false)
-    setPuzzleError('')
-    setPuzzleAnswer('')
-    setShowFireworks(true)
-
-    window.setTimeout(() => {
-      setShowFireworks(false)
-    }, 1000)
-  }
 
   const goToLetterPage = () => {
     navigate('/letter')
@@ -297,30 +262,20 @@ export default function BirthdayPage() {
           </article>
 
           <div className="mt-8 flex flex-col items-center gap-3">
-            {isPuzzleSolved ? (
-              <button
-                type="button"
-                onClick={handleOpenSurpriseLetterClick}
-                onMouseEnter={() => setLetterLinkHover(true)}
-                onMouseLeave={() => setLetterLinkHover(false)}
-                onFocus={() => setLetterLinkHover(true)}
-                onBlur={() => setLetterLinkHover(false)}
-                className="inline-flex w-full animate-pulse items-center justify-center rounded-full bg-gradient-to-r from-violet-600 via-purple-500 to-fuchsia-500 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-transform duration-300 hover:scale-105 hover:brightness-110 sm:w-auto sm:px-7 sm:text-sm sm:tracking-[0.2em]"
-              >
-                Open Surprise Letter 🎆
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={handleSurpriseClick}
-                className="w-full animate-pulse rounded-full bg-gradient-to-r from-violet-600 via-purple-500 to-fuchsia-500 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-transform duration-300 hover:scale-105 hover:brightness-110 sm:w-auto sm:px-7 sm:text-sm sm:tracking-[0.2em]"
-              >
-                Unlock Surprise Letter 🎆
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={handleOpenSurpriseLetterClick}
+              onMouseEnter={() => setLetterLinkHover(true)}
+              onMouseLeave={() => setLetterLinkHover(false)}
+              onFocus={() => setLetterLinkHover(true)}
+              onBlur={() => setLetterLinkHover(false)}
+              className="inline-flex w-full animate-pulse items-center justify-center rounded-full bg-gradient-to-r from-violet-600 via-purple-500 to-fuchsia-500 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-transform duration-300 hover:scale-105 hover:brightness-110 sm:w-auto sm:px-7 sm:text-sm sm:tracking-[0.2em]"
+            >
+              Open Surprise Letter 🎆
+            </button>
           </div>
 
-          {isPuzzleSolved && showLetterPasswordGate && (
+          {showLetterPasswordGate && (
             <form
               onSubmit={handleLetterPasswordSubmit}
               className="puzzle-card mx-auto mt-6 max-w-xl rounded-2xl border border-fuchsia-500/35 bg-violet-950/50 p-4 text-left shadow-xl shadow-fuchsia-900/25 backdrop-blur-md sm:p-5"
@@ -363,58 +318,11 @@ export default function BirthdayPage() {
             </form>
           )}
 
-          {showPuzzle && !isPuzzleSolved && (
-            <form
-              onSubmit={handlePuzzleSubmit}
-              className="puzzle-card mx-auto mt-6 max-w-xl rounded-2xl border border-violet-500/30 bg-violet-950/40 p-4 text-left shadow-xl shadow-violet-900/35 backdrop-blur-md sm:p-5"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-300/80 sm:text-sm">
-                Puzzle Lock
-              </p>
-              <h3 className="mt-2 text-base font-bold text-violet-100 sm:text-lg">
-                What is her favorite color?
-              </h3>
-              <p className="mt-2 text-sm text-violet-300/80">
-                Hint: it matches this website&apos;s theme.
-              </p>
-
-              <input
-                type="text"
-                value={puzzleAnswer}
-                onChange={(event) => setPuzzleAnswer(event.target.value)}
-                placeholder="Type the answer here..."
-                className="mt-4 w-full rounded-xl border border-violet-500/30 bg-black/30 px-4 py-3 text-violet-100 outline-none ring-violet-400/40 placeholder:text-violet-300/55 focus:ring-2"
-              />
-
-              {puzzleError && (
-                <p className="mt-2 text-sm font-medium text-violet-300">{puzzleError}</p>
-              )}
-
-              <button
-                type="submit"
-                className="mt-4 w-full rounded-full bg-violet-600 px-6 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white shadow-[0_0_20px_rgba(255,255,255,0.28)] transition-colors hover:bg-fuchsia-600 sm:w-auto sm:text-sm sm:tracking-[0.16em]"
-              >
-                Unlock Letter
-              </button>
-            </form>
-          )}
-
           <footer className="mt-10 rounded-2xl bg-violet-700 px-5 py-4 text-white shadow-xl shadow-violet-900/50 sm:px-6">
             <p className="text-base font-bold sm:text-lg">You deserve every sparkle in the world!</p>
           </footer>
         </section>
 
-        {showFireworks && (
-          <div className="fireworks pointer-events-none">
-            {[...Array(18)].map((_, index) => (
-              <span
-                key={index}
-                className="firework-dot"
-                style={{ '--i': index }}
-              />
-            ))}
-          </div>
-        )}
       </main>
     </Motion.div>
   )
