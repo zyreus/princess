@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+import CuteBackground from './components/CuteBackground.jsx'
 import { CustomCursor } from './components/CustomCursor.jsx'
 import { CursorHoverProvider } from './context/CursorHoverProvider.jsx'
 import BirthdayPage from './pages/BirthdayPage.jsx'
@@ -22,11 +23,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <CursorHoverProvider>
-        <div className="relative min-h-screen bg-[#0a0212] lg:cursor-none">
-          <div className="pointer-events-none fixed -left-32 -top-32 h-96 w-96 rounded-full bg-violet-900/30 blur-[120px]" />
-          <div className="pointer-events-none fixed -bottom-32 -right-32 h-96 w-96 rounded-full bg-fuchsia-900/20 blur-[120px]" />
+        <div className="relative min-h-screen overflow-x-hidden bg-[#0a0212] lg:cursor-none">
+          <CuteBackground />
           <CustomCursor />
-          <AnimatedRoutes />
+          <div className="relative z-[1]">
+            <AnimatedRoutes />
+          </div>
         </div>
       </CursorHoverProvider>
     </BrowserRouter>
