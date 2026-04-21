@@ -4,9 +4,9 @@ import { motion as Motion } from 'framer-motion'
 import { MAIN_LETTER_TEXT } from '../data/letterContent.js'
 import { markSurpriseLetterUnlocked } from '../utils/surpriseLetterUnlock.js'
 
-/** Official music video — Taylor Swift "22" (YouTube; enables autoplay + custom controls). */
-const YOUTUBE_VIDEO_ID = 'AgFeZr5ptV8'
-const SPOTIFY_TAYLORS_VERSION = '2T9WeqSMJJb8YBDHPYGU4p'
+/** Official music video — Edwin McCain "I'll Be" (YouTube; enables autoplay + custom controls). */
+const YOUTUBE_VIDEO_ID = '5qrTmNDZ-nc'
+const SPOTIFY_TRACK_ID = '5K7AMlpc4796JRWXb26nCV'
 
 export default function SurpriseLetter() {
   const playerRef = useRef(null)
@@ -163,7 +163,7 @@ export default function SurpriseLetter() {
           </h1>
 
           <p className="mt-4 text-center text-[11px] font-medium tracking-wide text-violet-300/85">
-            Music only · Taylor Swift — &quot;22&quot; · use the sparkly controls below
+            Music only · Edwin McCain — &quot;I&apos;ll Be&quot; · use the sparkly controls below
           </p>
 
           <div className="scroll-roll-inner mt-6 max-h-[min(48vh,440px)] overflow-y-auto pr-1 text-left">
@@ -207,12 +207,12 @@ export default function SurpriseLetter() {
             <p className="text-center text-[11px] leading-relaxed text-violet-400/85">
               Prefer{' '}
               <a
-                href={`https://open.spotify.com/track/${SPOTIFY_TAYLORS_VERSION}`}
+                href={`https://open.spotify.com/track/${SPOTIFY_TRACK_ID}`}
                 target="_blank"
                 rel="noreferrer"
                 className="text-fuchsia-300/95 underline decoration-violet-500/45 underline-offset-2 hover:text-fuchsia-200"
               >
-                22 (Taylor&apos;s Version) on Spotify
+                I&apos;ll Be on Spotify
               </a>
               .
             </p>
